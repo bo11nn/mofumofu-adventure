@@ -1,0 +1,35 @@
+!DOCTYPE html
+html lang=ja
+head
+  meta charset=UTF-8 
+  meta name=viewport content=width=device-width, initial-scale=1.0 
+  titleもふもふ冒険村（仮）title
+  link rel=stylesheet href=style.css 
+head
+body
+  div id=game
+    !-- タイトル画面 --
+    div id=title-screen
+      h1もふもふ冒険村h1
+      button id=start-buttonカプセルを開けるbutton
+    div
+
+    !-- 冒険画面 --
+    div id=adventure-screen class=hidden
+      h2 id=leader-nameh2
+      div id=map-containerdiv
+      div id=logdiv
+      button id=next-button class=hidden次へ進むbutton
+    div
+
+    !-- 結果画面 --
+    div id=result-screen class=hidden
+      h2冒険の結果h2
+      p id=score-summaryp
+      button onclick=location.reload()もう一度冒険するbutton
+    div
+  div
+
+  script src=main.jsscript
+body
+html
