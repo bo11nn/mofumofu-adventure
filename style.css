@@ -42,8 +42,19 @@ h1 {
   width: 90%;
   max-width: 500px;
   border-radius: 6px;
-  min-height: 60px;
+  min-height: 100px;
   white-space: pre-wrap;
+  text-align: left;
+}
+
+#log-history {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px dashed #ccc;
+  padding-top: 5px;
 }
 
 #status {
@@ -65,4 +76,9 @@ button {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+#retryButton {
+  margin-top: 10px;
+  display: none;
 }

@@ -2,15 +2,17 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>もふもふ冒険村（仮）</title>
+  <title>もふもふ冒険村</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>もふもふ冒険村（仮）</h1>
-  <div id="status">読み込み中...</div>
-  <div id="map" class="map"></div>
-  <div id="log" class="log">ゲームを開始しています...</div>
+  <h1>もふもふ冒険村</h1>
+  <div id="status">ロード中...</div>
+  <div id="map"></div>
+  <div id="log">イベントメッセージ</div>
+  <div id="log-history"></div>
   <button id="nextButton" onclick="next()">▶ 次へ進む</button>
+  <button id="retryButton" onclick="location.reload()" style="display:none;">🔁 もう一度遊ぶ</button>
   <script src="main.js"></script>
 </body>
 </html>
