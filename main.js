@@ -23,10 +23,9 @@ function initGame() {
   logHistory = [];
   updateStatus();
   renderMap();
-  showMessage("ゲームを開始しています...");
-  setTimeout(() => {
-    next();
-  }, 1000);
+  showMessage("ゲームを開始しました。『次へ進む』をクリックしてください。");
+  document.getElementById("nextButton").disabled = false;
+  document.getElementById("retryButton").style.display = "none";
 }
 
 function generateMap() {
@@ -63,7 +62,8 @@ function showMessage(msg) {
 
 function next() {
   if (currentPosition >= map.length) {
-    showMessage("冒険終了！おつかれさまでした！\nスコア：仲間" + score.allies + ", アイテム" + score.items);
+    const totalScore = score.allies * 3 + score.hp * 2 + score.items;
+    showMessage(`冒険終了！おつかれさまでした！\n仲間: ${score.allies} / HP: ${score.hp} / アイテム: ${score.items}\n総スコア: ${totalScore}`);
     document.getElementById("nextButton").disabled = true;
     document.getElementById("retryButton").style.display = "inline-block";
     return;
@@ -127,7 +127,8 @@ function next() {
   renderMap();
 
   if (score.hp <= 0) {
-    showMessage("HPが尽きてしまった…ゲームオーバー！\n仲間: " + score.allies + ", アイテム: " + score.items);
+    const totalScore = score.allies * 3 + score.hp * 2 + score.items;
+    showMessage("HPが尽きてしまった…ゲームオーバー！\n仲間: " + score.allies + ", アイテム: " + score.items + ", HP: 0\n総スコア: " + totalScore);
     document.getElementById("nextButton").disabled = true;
     document.getElementById("retryButton").style.display = "inline-block";
     return;
