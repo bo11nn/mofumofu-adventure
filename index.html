@@ -1,35 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>もふもふ冒険村（仮）</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="game">
-    <!-- タイトル画面 -->
-    <div id="title-screen">
-      <h1>もふもふ冒険村</h1>
-      <button id="start-button">カプセルを開ける</button>
-    </div>
-
-    <!-- 冒険画面 -->
-    <div id="adventure-screen" class="hidden">
-      <h2 id="leader-name"></h2>
-      <div id="map-container"></div>
-      <div id="log"></div>
-      <button id="next-button" class="hidden">次へ進む</button>
-    </div>
-
-    <!-- 結果画面 -->
-    <div id="result-screen" class="hidden">
-      <h2>冒険の結果</h2>
-      <p id="score-summary"></p>
-      <button onclick="location.reload()">もう一度冒険する</button>
-    </div>
-  </div>
-
+  <h1>もふもふ冒険村（仮）</h1>
+  <div id="status">読み込み中...</div>
+  <div id="map" class="map"></div>
+  <div id="log" class="log">ゲームを開始しています...</div>
+  <button id="nextButton" onclick="next()">▶ 次へ進む</button>
   <script src="main.js"></script>
 </body>
 </html>

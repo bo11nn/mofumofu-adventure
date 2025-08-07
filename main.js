@@ -1,108 +1,97 @@
+// main.js（JSON読み込み対応版）
+
+let characters = [];
+let events = [];
 let currentNode = 0;
-let map = [];
-let leader = null;
 let score = {
-  friends: 0,
+  hp: 5,
   items: 0,
-  hp: 3
+  friends: 0
 };
+let map = [];
 
-const characters = [
-  { name: "ぽむたろう", personality: "のんびり屋", line: "うーん、まだお昼寝してたいなぁ〜" },
-  { name: "ちびみる", personality: "元気っ子", line: "よーし！お宝ぜんぶ取っちゃうぞー！" },
-  { name: "ふわる", personality: "心配性", line: "だ、大丈夫かな……？でもがんばる！" }
-];
+async function loadGameData() {
+  const [charRes, eventRes] = await Promise.all([
+    fetch("data/characters.json"),
+    fetch("data/events.json")
+  ]);
+  characters = await charRes.json();
+  events = await eventRes.json();
 
-const events = ["treasure", "enemy", "rest", "friend"];
-
-function randomChoice(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+  initGame();
 }
 
-function startGame() {
-  leader = randomChoice(characters);
-  document.getElementById("leader-name").textContent =
-    `リーダー：${leader.name}（${leader.personality}）\n『${leader.line}』`;
-  document.getElementById("title-screen").classList.add("hidden");
-  document.getElementById("adventure-screen").classList.remove("hidden");
-  generateMap();
-  showNextNode();
+function initGame() {
+  map = generateMap();
+  renderMap();
+  showMessage(`${characters.find(c => c.type === "leader").name} の冒険がはじまるよ！`);
 }
 
 function generateMap() {
-  for (let i = 0; i < 10; i++) {
-    map.push({ event: randomChoice(events), visited: false });
+  const length = 10;
+  const route = [];
+  for (let i = 0; i < length; i++) {
+    const event = events[Math.floor(Math.random() * events.length)].type;
+    route.push({ event });
   }
-  renderMap();
+  return route;
 }
 
 function renderMap() {
-  const container = document.getElementById("map-container");
+  const container = document.getElementById("map");
   container.innerHTML = "";
-  map.forEach((node, index) => {
+  map.forEach((node, i) => {
     const div = document.createElement("div");
-    div.className = "map-node" + (node.visited ? " visited" : "");
-    div.textContent = index + 1;
+    div.className = "node" + (i === currentNode ? " active" : "");
+    div.textContent = i + 1;
     container.appendChild(div);
   });
+  updateStatus();
 }
 
-function showNextNode() {
-  if (currentNode >= map.length) {
-    endGame();
-    return;
-  }
-  const node = map[currentNode];
-  document.getElementById("next-button").classList.remove("hidden");
-  document.getElementById("next-button").onclick = () => {
-    runEvent(node.event);
-    node.visited = true;
-    currentNode++;
-    renderMap();
-  };
+function updateStatus() {
+  document.getElementById("status").innerText = `HP: ${score.hp} / 仲間: ${score.friends} / アイテム: ${score.items}`;
 }
 
-function log(text) {
-  document.getElementById("log").textContent = text;
+function showMessage(msg) {
+  document.getElementById("log").innerText = msg;
 }
 
-function runEvent(type) {
-  document.getElementById("next-button").classList.add("hidden");
-  let message = "";
-  switch (type) {
-    case "treasure":
-      message = "宝箱を発見！おいしそうなキャンディを見つけた！";
-      score.items++;
-      break;
-    case "enemy":
-      const win = Math.random() > 0.5;
-      if (win) {
-        message = "敵を倒した！お宝をゲット！";
-        score.items++;
-      } else {
-        message = "敵にちょっと負けちゃった……HPが減った。";
-        score.hp--;
+function next() {
+  if (currentNode >= map.length) return;
+
+  const eventType = map[currentNode].event;
+  const event = events.find(e => e.type === eventType);
+  let message = event.message;
+
+  // イベントの効果を適用
+  if (event.effect) {
+    if (event.effect.hp) {
+      score.hp += event.effect.hp;
+      if (score.hp < 0) score.hp = 0;
+    }
+    if (event.effect.items) {
+      score.items += event.effect.items;
+    }
+    if (event.effect.friends) {
+      const friend = characters.find(c => c.type === "friend" && !score["friendNames"]?.includes(c.name));
+      if (friend) {
+        message += `\n${friend.name}「${friend.line}」`;
+        score.friends++;
+        score.friendNames = [...(score.friendNames || []), friend.name];
       }
-      break;
-    case "rest":
-      message = "ふかふかの草原でひと休み。HPがちょっぴり回復した。";
-      score.hp++;
-      break;
-    case "friend":
-      message = "新しいもふもふ仲間が加わった！";
-      score.friends++;
-      break;
+    }
   }
-  log(message);
-  setTimeout(showNextNode, 1500);
+
+  showMessage(message);
+  currentNode++;
+  renderMap();
+
+  if (currentNode >= map.length) {
+    const finalScore = score.friends * 10 + score.items * 3 + score.hp * 5;
+    showMessage(`冒険終了！スコア: ${finalScore}\n仲間: ${score.friends} / アイテム: ${score.items} / HP: ${score.hp}`);
+    document.getElementById("nextButton").disabled = true;
+  }
 }
 
-function endGame() {
-  document.getElementById("adventure-screen").classList.add("hidden");
-  document.getElementById("result-screen").classList.remove("hidden");
-  const finalScore = score.friends * 10 + score.hp * 5 + score.items * 2;
-  document.getElementById("score-summary").textContent =
-    `仲間: ${score.friends}人、HP: ${score.hp}、アイテム: ${score.items} → 合計スコア: ${finalScore}点！`;
-}
-
-document.getElementById("start-button").addEventListener("click", startGame);
+document.addEventListener("DOMContentLoaded", loadGameData);
