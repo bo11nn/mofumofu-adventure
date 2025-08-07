@@ -1,0 +1,59 @@
+[
+  {
+    "type": "treasure",
+    "label": "宝箱",
+    "effect": {
+      "items": 1
+    },
+    "message": "宝箱を発見！中にはおいしそうなキャンディが入っていた！"
+  },
+  {
+    "type": "bigTreasure",
+    "label": "大きな宝箱",
+    "effect": {
+      "items": 2
+    },
+    "message": "豪華な宝箱を発見！中にはきらきらのキャンディがぎっしり！"
+  },
+  {
+    "type": "enemy",
+    "label": "敵",
+    "effect": {
+      "hp": -1
+    },
+    "message": "敵が現れた！勝てるかな…？"
+  },
+  {
+    "type": "strongEnemy",
+    "label": "強敵",
+    "effect": {
+      "hp": -2,
+      "items": 2
+    },
+    "message": "とても強そうな敵が現れた！勝てば報酬も大きいぞ！"
+  },
+  {
+    "type": "rest",
+    "label": "休憩所",
+    "effect": {
+      "hp": 1
+    },
+    "message": "ふかふかの休憩所でひとやすみ…HPが回復した！"
+  },
+  {
+    "type": "trap",
+    "label": "罠",
+    "effect": {
+      "hp": -1
+    },
+    "message": "足元の罠に引っかかった！痛い！"
+  },
+  {
+    "type": "friend",
+    "label": "仲間",
+    "effect": {
+      "friends": 1
+    },
+    "message": "新しいもふもふが仲間になった！"
+  }
+]

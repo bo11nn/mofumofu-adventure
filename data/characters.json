@@ -1,0 +1,23 @@
+[
+  {
+    "id": "pomu",
+    "name": "ぽむたろう",
+    "type": "leader",
+    "line": "ボクについてきてね！",
+    "image": "images/pomu.png"
+  },
+  {
+    "id": "moko",
+    "name": "もこたん",
+    "type": "friend",
+    "line": "えへへ…よろしくね♪",
+    "image": "images/moko.png"
+  },
+  {
+    "id": "shiro",
+    "name": "しろまる",
+    "type": "friend",
+    "line": "静かだけど、がんばるよ。",
+    "image": "images/shiro.png"
+  }
+]
