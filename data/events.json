@@ -1,59 +1,44 @@
 [
   {
-    "type": "treasure",
-    "label": "宝箱",
-    "effect": {
-      "items": 1
-    },
-    "message": "宝箱を発見！中にはおいしそうなキャンディが入っていた！"
+    "label": "宝",
+    "message": "小さな宝箱を見つけた！アイテムを1つ手に入れた。",
+    "effect": { "items": 1 },
+    "weight": 3
   },
   {
-    "type": "bigTreasure",
-    "label": "大きな宝箱",
-    "effect": {
-      "items": 2
-    },
-    "message": "豪華な宝箱を発見！中にはきらきらのキャンディがぎっしり！"
-  },
-  {
-    "type": "enemy",
-    "label": "敵",
-    "effect": {
-      "hp": -1
-    },
-    "message": "敵が現れた！勝てるかな…？"
-  },
-  {
-    "type": "strongEnemy",
-    "label": "強敵",
-    "effect": {
-      "hp": -2,
-      "items": 2
-    },
-    "message": "とても強そうな敵が現れた！勝てば報酬も大きいぞ！"
-  },
-  {
-    "type": "rest",
-    "label": "休憩所",
-    "effect": {
-      "hp": 1
-    },
-    "message": "ふかふかの休憩所でひとやすみ…HPが回復した！"
-  },
-  {
-    "type": "trap",
     "label": "罠",
-    "effect": {
-      "hp": -1
-    },
-    "message": "足元の罠に引っかかった！痛い！"
+    "message": "罠に引っかかった！HPが1減った…",
+    "effect": { "hp": -1 },
+    "weight": 2
   },
   {
-    "type": "friend",
+    "label": "大宝",
+    "message": "大きな宝箱を発見！アイテムを3つ手に入れた！",
+    "effect": { "items": 3 },
+    "weight": 1
+  },
+  {
+    "label": "休",
+    "message": "休憩所でひとやすみ。HPが1回復した。",
+    "effect": { "hp": 1 },
+    "weight": 2
+  },
+  {
     "label": "仲間",
-    "effect": {
-      "friends": 1
-    },
-    "message": "新しいもふもふが仲間になった！"
+    "message": "心強い仲間が加わった！",
+    "effect": { "friends": 1 },
+    "weight": 2
+  },
+  {
+    "label": "敵",
+    "message": "敵と遭遇！HPが1減った…",
+    "effect": { "hp": -1 },
+    "weight": 3
+  },
+  {
+    "label": "強敵",
+    "message": "強敵と遭遇！激しい戦いでHPが2減った…勝利しアイテムを1つ入手！",
+    "effect": { "hp": -2, "items": 1 },
+    "weight": 1
   }
 ]
