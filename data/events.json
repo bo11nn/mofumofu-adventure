@@ -1,44 +1,70 @@
 [
   {
-    "label": "宝",
-    "message": "小さな宝箱を見つけた！アイテムを1つ手に入れた。",
-    "effect": { "items": 1 },
-    "weight": 3
+    "id": "pomu",
+    "type": "friend",
+    "name": "ぽむたろう",
+    "line": "ボクもいっしょに行くよ！",
+    "image": "assets/characters/pomu.png",
+    "ability": {
+      "code": "auto_heal_once",
+      "label": "一度だけ自動回復",
+      "trigger": "post_battle_if_hp_loss",
+      "uses": 1,
+      "effect": { "hp": 1 }
+    }
   },
   {
-    "label": "罠",
-    "message": "罠に引っかかった！HPが1減った…",
-    "effect": { "hp": -1 },
-    "weight": 2
+    "id": "moko",
+    "type": "friend",
+    "name": "もこたん",
+    "line": "えへへ…よろしくね♪",
+    "image": "assets/characters/moko.png",
+    "ability": {
+      "code": "chest_bonus",
+      "label": "宝箱プラス",
+      "trigger": "on_treasure",
+      "effect": { "items": 1 }
+    }
   },
   {
-    "label": "大宝",
-    "message": "大きな宝箱を発見！アイテムを3つ手に入れた！",
-    "effect": { "items": 3 },
-    "weight": 1
+    "id": "shiro",
+    "type": "friend",
+    "name": "しろまる",
+    "line": "静かだけど、がんばるよ。",
+    "image": "assets/characters/shiro.png",
+    "ability": {
+      "code": "trap_guard",
+      "label": "罠ダメージ軽減",
+      "trigger": "on_trap",
+      "modifier": { "hp_damage_multi": 0.0 }
+    }
   },
   {
-    "label": "休",
-    "message": "休憩所でひとやすみ。HPが1回復した。",
-    "effect": { "hp": 1 },
-    "weight": 2
+    "id": "koro",
+    "type": "friend",
+    "name": "ころりん",
+    "line": "おやつ分けてくれたら全力出す～！",
+    "image": "assets/characters/koro.png",
+    "ability": {
+      "code": "strong_enemy_soften_once",
+      "label": "強敵一度だけ弱体化",
+      "trigger": "pre_strong_enemy",
+      "uses": 1,
+      "modifier": { "enemy_type_downgrade": "enemy" }
+    }
   },
   {
-    "label": "仲間",
-    "message": "心強い仲間が加わった！",
-    "effect": { "friends": 1 },
-    "weight": 2
-  },
-  {
-    "label": "敵",
-    "message": "敵と遭遇！HPが1減った…",
-    "effect": { "hp": -1 },
-    "weight": 3
-  },
-  {
-    "label": "強敵",
-    "message": "強敵と遭遇！激しい戦いでHPが2減った…勝利しアイテムを1つ入手！",
-    "effect": { "hp": -2, "items": 1 },
-    "weight": 1
+    "id": "fuwari",
+    "type": "friend",
+    "name": "ふわり",
+    "line": "ふわっと守ってあげるね…！",
+    "image": "assets/characters/fuwari.png",
+    "ability": {
+      "code": "first_damage_shield",
+      "label": "初被弾を無効化",
+      "trigger": "pre_hp_loss",
+      "uses": 1,
+      "modifier": { "skip_hp_loss": true }
+    }
   }
 ]
